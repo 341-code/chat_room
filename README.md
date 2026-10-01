@@ -145,12 +145,23 @@ chat_room
 
 ## 运行截图
 
-> 将截图放入 `docs/screenshots/` 后取消下面注释即可显示。
-<!--
+### 登录界面
+
 ![登录界面](docs/screenshots/login.png)
+
+### 实时聊天（双用户在线）
+
 ![实时聊天](docs/screenshots/chat.png)
-![XSS 攻击拦截](docs/screenshots/xss-block.png)
--->
+
+### XSS 攻击载荷防护验证
+
+![XSS 攻击载荷防护](docs/screenshots/xss-block.png)
+
+上图以 Bob 为攻击者视角，验证了服务端对两类载荷的处理结果：
+
+- 混合载荷 `恶意载荷 <script>alert("XSS")</script> 清洗后应仍然可读`：`<script>` 标签被清洗掉，只保留正常文字，消息正常广播；
+- 纯标签载荷 `<img src=x onerror=alert("XSS")>`：清洗后内容为空，被服务端直接拒绝（底部提示"消息内容不能为空"），不会广播给任何在线用户；
+- 两次尝试均未触发任何 JS 弹窗，说明攻击载荷没有被执行。
 
 ## 代码特点
 
