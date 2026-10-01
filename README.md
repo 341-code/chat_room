@@ -7,6 +7,7 @@
 ![Socket.IO](https://img.shields.io/badge/Socket.IO-4.x-010101?logo=socket.io&logoColor=white)
 ![Express](https://img.shields.io/badge/Express-4.x-000000?logo=express&logoColor=white)
 ![Jest](https://img.shields.io/badge/test-Jest-C21325?logo=jest&logoColor=white)
+[![CI](https://github.com/341-code/chat_room/actions/workflows/ci.yml/badge.svg)](https://github.com/341-code/chat_room/actions/workflows/ci.yml)
 
 ## 项目简介
 
