@@ -27,9 +27,9 @@ app.use(cors({
 app.use(express.json());
 app.use(express.static('public'));
 
-// Session配置
+// Session配置（密钥来自 .env，dotenv 已在 config/db.config.js 中加载）
 app.use(session({
-    secret: 'chat-room-secret-key',
+    secret: process.env.SESSION_SECRET || 'dev-only-insecure-session-secret',
     resave: false,
     saveUninitialized: false,
     cookie: {

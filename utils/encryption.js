@@ -1,12 +1,22 @@
+require('dotenv').config(); // 从 .env 读取密钥
 const CryptoJS = require('crypto-js');
 
 /**
  * AES加密工具 - 用于消息传输加密
  * 对应论文：传输加密防护
  */
+const ENV_SECRET_KEY = process.env.AES_SECRET_KEY;
+if (!ENV_SECRET_KEY) {
+    console.warn('[encryption] 未配置 AES_SECRET_KEY，正在使用仅供本地开发的默认密钥；请复制 .env.example 为 .env 并配置');
+}
+// 默认值仅用于未配置 .env 时保证项目可运行，生产环境必须通过 AES_SECRET_KEY 覆盖
+const EFFECTIVE_SECRET_KEY = ENV_SECRET_KEY || 'dev-only-insecure-key';
+
 class Encryption {
-    // 密钥（实际应用中应从环境变量读取）
-    static SECRET_KEY = 'chat-room-secret-key-2026';
+    // 密钥统一来自环境变量，源码中不再硬编码真实密钥
+    static get SECRET_KEY() {
+        return EFFECTIVE_SECRET_KEY;
+    }
 
     /**
      * AES加密
